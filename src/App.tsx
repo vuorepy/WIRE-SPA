@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "./components/Layout";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./views/Home";
-import Thread from "./views/Thread";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import ProjectLibrary from "views/ProjectLibrary";
+import Project from "views/Project";
+import Login from "views/Login";
+import ProtectedRoute from "components/Common/ProtectedRoute";
 
 const App: React.FC = () => {
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/thread/:id" element={<Thread />} />
+        <Route path="/login" element={<Login />} />
+        <Route element={<ProtectedRoute element={< Layout />} />} >
+          <Route path="/project/:id" element={<Project />} />
+          <Route path="/" element={<ProjectLibrary />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 };
 

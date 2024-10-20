@@ -1,12 +1,32 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "allowJs": true,
-      "jsx": "react",
-      "moduleResolution": "node",
-      "outDir": "./dist",
-      "strict": true,
-      "esModuleInterop": true
+  "compilerOptions": {
+    "target": "es5",
+    "allowJs": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "paths": {
+      "views/*": [
+        "views/*"
+      ],
+      "services/*": [
+        "services/*"
+      ],
+      "components/*": [
+        "components/*"
+      ],
+      "config/*": [
+        "config/*"
+      ],
+      "types/*": [
+        "types/*"
+      ]
     },
-    "include": ["src/**/*"]
+  },
+  "include": [
+    "src/**/*"
+  ]
 }
