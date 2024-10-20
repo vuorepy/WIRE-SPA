@@ -6,7 +6,7 @@ import { LoadingButton } from '@mui/lab';
 import { IDocument, IUpdateDocument } from 'types/documentTypes';
 import { updateDocument } from 'services/documentService';
 import { useAppDispatch } from 'hooks';
-import { updateDocumentReducer } from 'slices/documentSlice';
+import { setSelectedDocumentReducer, updateDocumentReducer } from 'slices/documentSlice';
 
 interface UpdateDocumentDialogProps {
   document: IDocument;
@@ -34,6 +34,7 @@ const UpdateDocumentDialog: React.FC<UpdateDocumentDialogProps> = ({ document, o
 
       updateDocument(document.id, values).then((document) => {
         dispatch(updateDocumentReducer(document));
+        dispatch(setSelectedDocumentReducer(document));
         handleOnClose();
       }).catch((error) => {
         console.error('Failed to update document:', error);

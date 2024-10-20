@@ -9,9 +9,9 @@ import SaveIcon from '@mui/icons-material/Save';
 import { LoadingButton } from "@mui/lab";
 import { updateDocument } from "services/documentService";
 import EditIcon from '@mui/icons-material/Edit';
-import UpdateDocumentDialog from "../UpdateDocumentDialog/UpdateDocumentDialog";
-import { useAppDispatch, useAppSelector } from "hooks";
+import { useAppDispatch } from "hooks";
 import { updateDocumentReducer } from "slices/documentSlice";
+import UpdateDocumentDialog from "../UpdateDocumentDialog";
 
 interface DocumentEditorProps {
   document: IDocument;
@@ -20,9 +20,6 @@ interface DocumentEditorProps {
 
 const DocumentEditor: React.FC<DocumentEditorProps> = ({ document, onContentChange }) => {
   const dispatch = useAppDispatch();
-  const selectedDocument = useAppSelector(
-    (state) => state.document.selectedDocument
-  );
   const [editorContent, setEditorContent] = useState<string>('');
   const [prompt, setPrompt] = useState<string>('');
   const [updateDocumentDialogOpen, setUpdateDocumentDialogOpen] = useState(false);
@@ -88,7 +85,7 @@ const DocumentEditor: React.FC<DocumentEditorProps> = ({ document, onContentChan
           <Grid xs={11} container padding={2} alignItems="flex-start">
             <Grid item >
               <Typography variant="h2">
-                {selectedDocument && selectedDocument.title}
+                {document.title}
               </Typography>
             </Grid>
             <Grid item >
@@ -99,7 +96,7 @@ const DocumentEditor: React.FC<DocumentEditorProps> = ({ document, onContentChan
               >
                 <EditIcon />
               </LoadingButton>
-              {selectedDocument && <UpdateDocumentDialog document={selectedDocument} open={updateDocumentDialogOpen} onClose={handleOnUpdateDocumentClose} />}
+              <UpdateDocumentDialog document={document} open={updateDocumentDialogOpen} onClose={handleOnUpdateDocumentClose} />
             </Grid>
           </Grid>
           <Grid xs={1} item>

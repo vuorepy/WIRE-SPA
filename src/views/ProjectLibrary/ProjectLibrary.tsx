@@ -4,6 +4,7 @@ import ProjectCard from "components/Project/ProjectCard";
 import { useAppDispatch, useAppSelector } from "hooks";
 import React, { useEffect, useState } from "react";
 import { getProjects } from "services/projectService";
+import { resetDocumentReducer } from "slices/documentSlice";
 import { setProjectsReducer } from "slices/projectSlice";
 import { IProject } from "types/projectTypes";
 
@@ -17,6 +18,7 @@ const ProjectLibrary = () => {
     useEffect(() => {
         getProjects().then((projects) => {
             dispatch(setProjectsReducer(projects));
+            dispatch(resetDocumentReducer(null));
         }).catch((error) => {
             console.error('Failed to fetch projects:', error);
         });
@@ -43,7 +45,7 @@ const ProjectLibrary = () => {
                     <CreateProjectDialog open={openCreateProjectDialog} onClose={onCloseCreateProjectDialog} />
                 </Grid>
             </Grid>
-            <Grid container spacing={2} justifyContent="space-between" paddingTop={2}>
+            <Grid container spacing={2} justifyContent="left" paddingTop={2}>
                 {projects?.map((project, index) => (
                     <Grid key={index} item xs={3} margin={2}>
                         <ProjectCard key={index} project={project} />
